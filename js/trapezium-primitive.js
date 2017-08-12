@@ -1,9 +1,20 @@
 AFRAME.registerGeometry("trapezium", {
+	
 	schema : {
-		topWidth: { default: 1, min: 0 },
-		bottomWidth: { default: 2, min: 0},
-		height: { default: 1, min: 0}
+		topWidth: { 
+			default: 1, 
+			min: 0 
+		},
+		bottomWidth: { 
+			default: 2, 
+			min: 0
+		},
+		height: { 
+			default: 1, 
+			min: 0
+		}
 	},
+
 	init: function(data){
 	
 		const geometry  = new THREE.Geometry();
@@ -11,7 +22,8 @@ AFRAME.registerGeometry("trapezium", {
 		//define vertices
 		//------------------------------------------------
 		let vertices, wingWidth, origin;
-		if(data.topWidth < data.bottomWidth){
+		const bottomHeavy = data.topWidth < data.bottomWidth;
+		if(bottomHeavy){
 			origin 		= -(data.bottomWidth / 2);
 			wingWidth 	= (data.bottomWidth - data.topWidth) / 2;
 			vertices 	= [
@@ -60,7 +72,6 @@ AFRAME.registerGeometry("trapezium", {
 		let face, face3;
 		for(face of faces){
 		  face3 = new THREE.Face3(face[0], face[1], face[2]);
-		  console.log("adding face : ", face3);
 		  geometry.faces.push(face3);
 		}
 		
@@ -69,7 +80,6 @@ AFRAME.registerGeometry("trapezium", {
 		geometry.mergeVertices();         
 		geometry.computeFaceNormals();    
 		geometry.computeVertexNormals();  
-		console.log(geometry);
 		
 		this.geometry = geometry;
   }//init
