@@ -16,14 +16,29 @@ Provides a trapezium geometry primitive for A-Frame
 
         <script src="js/trapezium-primitive.js"></script>
 
-2. Use `trapezium` as the value of your primitive in your geometry declaration :
+2(a). Use `trapezium` as the value of your primitive in your geometry declaration :
 
         <a-entity 
             geometry="primitive: trapezium">
         </a-entity>
 
-3. Add any additional properties as needed :
+3(a). Add any additional properties as needed :
 
         <a-entity 
             geometry="primitive: trapezium; height: 2; topWidth: 7; bottomWidth: 4">
         </a-entity>    				
+
+*OR*
+
+2(b). Use the `<a-trapezium>` primitive :
+
+        <a-trapezium>
+        </a-trapezium>
+
+3(b). Add any additional properties as needed :
+
+        <a-trapezium
+            height="2"
+            topWidth="7"
+            bottomWidth="4">
+        </a-trapezium>
