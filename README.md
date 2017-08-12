@@ -12,7 +12,7 @@ Provides a primitive trapezium geometry for A-Frame
 
 1. Reference `trapezium-primitive.js` in the `<head>` of your HTML document :
 
-    <script src="js/trapezium-primitive.js"></script>
+        <script src="js/trapezium-primitive.js"></script>
 
 2. Use `trapezium` as the value of your primitive in your geometry declaration :
 
