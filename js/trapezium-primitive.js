@@ -83,4 +83,17 @@ AFRAME.registerGeometry("trapezium", {
 		
 		this.geometry = geometry;
   }//init
-})
+});
+
+AFRAME.registerPrimitive('a-trapezium', {
+	defaultComponents: {
+		geometry: {
+			primitive: "trapezium"
+		}
+	},
+	mappings: {
+		height: 'geometry.height',
+		topwidth: 'geometry.topWidth',
+		bottomwidth: 'geometry.bottomWidth'
+	}
+});
