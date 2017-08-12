@@ -6,7 +6,7 @@ Provides a trapezium geometry primitive for A-Frame
 ## Properties
 
 * **topWidth** : Width of top of trapezium *(defaults to 1)*
-* **bottoWidth** : width of bottom of trapezium *(defaults to 2)*
+* **bottomWidth** : width of bottom of trapezium *(defaults to 2)*
 * **height** : height of trapezium *(defaults to 1)*
 
 
