@@ -1,4 +1,4 @@
-# A-Frame-Trapezium-Primitive
+# A-Frame Trapezium Primitive
 Provides a trapezium geometry primitive for A-Frame
 
 ![Trapezium Primitive](https://raw.githubusercontent.com/pookage/a-frame-trapezium-primitive/master/img/trapezium.gif)
