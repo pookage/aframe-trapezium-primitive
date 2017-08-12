@@ -1,6 +1,8 @@
 # A-Frame-Trapezium-Primitive
 Provides a primitive trapezium geometry for A-Frame
 
+![Trapezium Primitive](https://raw.githubusercontent.com/pookage/a-frame-trapezium-primitive/master/img/trapezium.gif)
+
 ## Properties
 
 * **topWidth** : Width of top of trapezium *(defaults to 1)*

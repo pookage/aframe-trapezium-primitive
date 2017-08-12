@@ -61,8 +61,8 @@ AFRAME.registerGeometry("trapezium", {
 		//-----------------------------------------------
 		let vertex, vector3;
 		for(vertex of vertices){
-		  vector3 = new THREE.Vector3(vertex[0], vertex[1], vertex[2]);
-		  geometry.vertices.push(vector3);
+			vector3 = new THREE.Vector3(vertex[0], vertex[1], vertex[2]);
+			geometry.vertices.push(vector3);
 		}
 		geometry.computeBoundingBox();
 		geometry.computeBoundingSphere();
@@ -71,8 +71,8 @@ AFRAME.registerGeometry("trapezium", {
 		//-----------------------------------------------
 		let face, face3;
 		for(face of faces){
-		  face3 = new THREE.Face3(face[0], face[1], face[2]);
-		  geometry.faces.push(face3);
+			face3 = new THREE.Face3(face[0], face[1], face[2]);
+			geometry.faces.push(face3);
 		}
 		
 		//setup normal etc
