@@ -1,0 +1,76 @@
+AFRAME.registerGeometry("trapezium", {
+	schema : {
+		topWidth: { default: 1, min: 0 },
+		bottomWidth: { default: 2, min: 0},
+		height: { default: 1, min: 0}
+	},
+	init: function(data){
+	
+		const geometry  = new THREE.Geometry();
+
+		//define vertices
+		//------------------------------------------------
+		let vertices, wingWidth, origin;
+		if(data.topWidth < data.bottomWidth){
+			origin 		= -(data.bottomWidth / 2);
+			wingWidth 	= (data.bottomWidth - data.topWidth) / 2;
+			vertices 	= [
+				[origin, 0, 0],
+				[(origin + wingWidth), data.height, 0],
+				[(origin + (wingWidth + data.topWidth)), data.height, 0],
+				[(origin + ((wingWidth * 2) + data.topWidth)), 0, 0],
+				[(origin + (wingWidth + data.topWidth)), 0, 0],
+				[(origin + wingWidth), 0, 0]
+			];
+			
+		} else {
+			origin 		= -(data.topWidth / 2);
+			wingWidth 	= (data.topWidth - data.bottomWidth) / 2;
+			vertices 	= [
+				[origin, data.height, 0],
+				[(origin + wingWidth), data.height, 0],
+				[(origin + (wingWidth + data.bottomWidth)), data.height, 0],
+				[(origin + ((wingWidth * 2) + data.bottomWidth)), data.height, 0],
+				[(origin + (wingWidth + data.bottomWidth)), 0, 0],
+				[(origin + wingWidth), 0, 0]
+			];
+		}
+	
+		//define faces
+		//-------------------------------------------------
+		const faces = [
+			[5, 1, 0],
+			[5, 2, 1],
+			[5, 4, 2],
+			[4, 3, 2]
+		]
+		
+		//attach vertices
+		//-----------------------------------------------
+		let vertex, vector3;
+		for(vertex of vertices){
+		  vector3 = new THREE.Vector3(vertex[0], vertex[1], vertex[2]);
+		  geometry.vertices.push(vector3);
+		}
+		geometry.computeBoundingBox();
+		geometry.computeBoundingSphere();
+		
+		//attach faces
+		//-----------------------------------------------
+		let face, face3;
+		for(face of faces){
+		  face3 = new THREE.Face3(face[0], face[1], face[2]);
+		  console.log("adding face : ", face3);
+		  geometry.faces.push(face3);
+		}
+		
+		//setup normal etc
+		//-----------------------------------------------
+		geometry.mergeVertices();         
+		geometry.computeFaceNormals();    
+		geometry.computeVertexNormals();  
+		console.log(geometry);
+		
+		this.geometry = geometry;
+  }//init
+})
