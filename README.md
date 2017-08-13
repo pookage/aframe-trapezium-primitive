@@ -8,6 +8,7 @@ Provides a trapezium geometry primitive for A-Frame
 * **topWidth** : Width of top of trapezium *(defaults to 1)*
 * **bottomWidth** : width of bottom of trapezium *(defaults to 2)*
 * **height** : height of trapezium *(defaults to 1)*
+* **flat** : renders the trapezium flat on the floor by default instead of upright *(defaults to false)*
 
 
 ## Usage

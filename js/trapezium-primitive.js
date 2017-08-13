@@ -12,12 +12,17 @@ AFRAME.registerGeometry("trapezium", {
 		height: { 
 			default: 1, 
 			min: 0
+		},
+		flat: {
+			default: false
 		}
 	},
 
 	init: function(data){
 	
 		const geometry  = new THREE.Geometry();
+
+		console.log("flat trapezium : ", data.flat);
 
 		//define vertices
 		//------------------------------------------------
@@ -28,8 +33,8 @@ AFRAME.registerGeometry("trapezium", {
 			wingWidth 	= (data.bottomWidth - data.topWidth) / 2;
 			vertices 	= [
 				[origin, 0, 0],
-				[(origin + wingWidth), data.height, 0],
-				[(origin + (wingWidth + data.topWidth)), data.height, 0],
+				[(origin + wingWidth), (data.height * !data.flat), -(data.height * data.flat)],
+				[(origin + (wingWidth + data.topWidth)), (data.height * !data.flat), -(data.height * data.flat)],
 				[(origin + ((wingWidth * 2) + data.topWidth)), 0, 0],
 				[(origin + (wingWidth + data.topWidth)), 0, 0],
 				[(origin + wingWidth), 0, 0]
@@ -40,9 +45,9 @@ AFRAME.registerGeometry("trapezium", {
 			wingWidth 	= (data.topWidth - data.bottomWidth) / 2;
 			vertices 	= [
 				[origin, data.height, 0],
-				[(origin + wingWidth), data.height, 0],
-				[(origin + (wingWidth + data.bottomWidth)), data.height, 0],
-				[(origin + ((wingWidth * 2) + data.bottomWidth)), data.height, 0],
+				[(origin + wingWidth), (data.height * !data.flat), -(data.height * data.flat)],
+				[(origin + (wingWidth + data.bottomWidth)), (data.height * !data.flat), -(data.height * data.flat)],
+				[(origin + ((wingWidth * 2) + data.bottomWidth)), (data.height * !data.flat), -(data.height * data.flat)],
 				[(origin + (wingWidth + data.bottomWidth)), 0, 0],
 				[(origin + wingWidth), 0, 0]
 			];
@@ -50,12 +55,12 @@ AFRAME.registerGeometry("trapezium", {
 	
 		//define faces
 		//-------------------------------------------------
-		const faces = [
+		let faces = [
 			[5, 1, 0],
 			[5, 2, 1],
 			[5, 4, 2],
 			[4, 3, 2]
-		]
+		];
 		
 		//attach vertices
 		//-----------------------------------------------
@@ -94,6 +99,7 @@ AFRAME.registerPrimitive('a-trapezium', {
 	mappings: {
 		height: 'geometry.height',
 		topwidth: 'geometry.topWidth',
-		bottomwidth: 'geometry.bottomWidth'
+		bottomwidth: 'geometry.bottomWidth',
+		flat: "trapezium.flat"
 	}
 });
