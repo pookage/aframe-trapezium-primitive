@@ -22,34 +22,32 @@ AFRAME.registerGeometry("trapezium", {
 	
 		const geometry  = new THREE.Geometry();
 
-		console.log("flat trapezium : ", data.flat);
-
 		//define vertices
 		//------------------------------------------------
-		let vertices, wingWidth, origin;
-		const bottomHeavy = data.topWidth < data.bottomWidth;
+		const yOrigin 		= -(data.height / 2);
+		const bottomHeavy 	= data.topWidth < data.bottomWidth;
+		const xOrigin 		= bottomHeavy ? -(data.bottomWidth) / 2 : -(data.topWidth) / 2;
+		const wingWidth 	= bottomHeavy ? (data.bottomWidth - data.topWidth) / 2 : wingWidth 	= (data.topWidth - data.bottomWidth) / 2;
+
+		let vertices;
 		if(bottomHeavy){
-			origin 		= -(data.bottomWidth / 2);
-			wingWidth 	= (data.bottomWidth - data.topWidth) / 2;
-			vertices 	= [
-				[origin, 0, 0],
-				[(origin + wingWidth), (data.height * !data.flat), -(data.height * data.flat)],
-				[(origin + (wingWidth + data.topWidth)), (data.height * !data.flat), -(data.height * data.flat)],
-				[(origin + ((wingWidth * 2) + data.topWidth)), 0, 0],
-				[(origin + (wingWidth + data.topWidth)), 0, 0],
-				[(origin + wingWidth), 0, 0]
+			vertices = [
+				[xOrigin, (yOrigin * !data.flat), -(yOrigin * data.flat)],
+				[(xOrigin + wingWidth), ((data.height + yOrigin) * !data.flat), -((data.height + yOrigin) * data.flat)],
+				[(xOrigin + (wingWidth + data.topWidth)), ((data.height + yOrigin) * !data.flat), -((data.height + yOrigin) * data.flat)],
+				[(xOrigin + ((wingWidth * 2) + data.topWidth)), (yOrigin * !data.flat), -(yOrigin * data.flat)],
+				[(xOrigin + (wingWidth + data.topWidth)), (yOrigin * !data.flat), -(yOrigin * data.flat)],
+				[(xOrigin + wingWidth), (yOrigin * !data.flat), -(yOrigin * data.flat)]
 			];
 			
 		} else {
-			origin 		= -(data.topWidth / 2);
-			wingWidth 	= (data.topWidth - data.bottomWidth) / 2;
-			vertices 	= [
-				[origin, data.height, 0],
-				[(origin + wingWidth), (data.height * !data.flat), -(data.height * data.flat)],
-				[(origin + (wingWidth + data.bottomWidth)), (data.height * !data.flat), -(data.height * data.flat)],
-				[(origin + ((wingWidth * 2) + data.bottomWidth)), (data.height * !data.flat), -(data.height * data.flat)],
-				[(origin + (wingWidth + data.bottomWidth)), 0, 0],
-				[(origin + wingWidth), 0, 0]
+			vertices = [
+				[xOrigin, ((data.height + yOrigin) * !data.flat), -((data.height + yOrigin) * data.flat)],
+				[(xOrigin + wingWidth), ((data.height + yOrigin) * !data.flat), -((data.height + yOrigin) * data.flat)],
+				[(xOrigin + (wingWidth + data.bottomWidth)), ((data.height + yOrigin) * !data.flat), -((data.height + yOrigin) * data.flat)],
+				[(xOrigin + ((wingWidth * 2) + data.bottomWidth)), ((data.height + yOrigin) * !data.flat), -((data.height + yOrigin) * data.flat)],
+				[(xOrigin + (wingWidth + data.bottomWidth)), (yOrigin * !data.flat), -(yOrigin * data.flat)],
+				[(xOrigin + wingWidth), (yOrigin * !data.flat), -(yOrigin * data.flat)]
 			];
 		}
 	
@@ -80,7 +78,7 @@ AFRAME.registerGeometry("trapezium", {
 			geometry.faces.push(face3);
 		}
 		
-		//setup normal etc
+		//setup normals etc
 		//-----------------------------------------------
 		geometry.mergeVertices();         
 		geometry.computeFaceNormals();    
@@ -100,6 +98,6 @@ AFRAME.registerPrimitive('a-trapezium', {
 		height: 'geometry.height',
 		topwidth: 'geometry.topWidth',
 		bottomwidth: 'geometry.bottomWidth',
-		flat: "trapezium.flat"
+		flat: "geometry.flat"
 	}
 });
