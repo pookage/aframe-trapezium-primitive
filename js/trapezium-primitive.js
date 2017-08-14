@@ -15,6 +15,9 @@ AFRAME.registerGeometry("trapezium", {
 		},
 		flat: {
 			default: false
+		},
+		pivot: {
+			default: "center"
 		}
 	},
 
@@ -22,9 +25,21 @@ AFRAME.registerGeometry("trapezium", {
 	
 		const geometry  = new THREE.Geometry();
 
+		let yOrigin;
+		switch(data.pivot){
+			case "center":
+				yOrigin = -(data.height / 2);
+				break;
+			case "top":
+				yOrigin = -data.height;
+				break;
+			case "bottom":
+				yOrigin = 0;
+				break;
+		}
+
 		//define vertices
 		//------------------------------------------------
-		const yOrigin 		= -(data.height / 2);
 		const bottomHeavy 	= data.topWidth < data.bottomWidth;
 		const xOrigin 		= bottomHeavy ? -(data.bottomWidth) / 2 : -(data.topWidth) / 2;
 		const wingWidth 	= bottomHeavy ? (data.bottomWidth - data.topWidth) / 2 : wingWidth 	= (data.topWidth - data.bottomWidth) / 2;
