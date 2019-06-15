@@ -24,14 +24,15 @@ AFRAME.registerGeometry("trapezium", {
 	init: function(data){
 	
 		const geometry  = new THREE.Geometry();
+		const { flat, height, topWidth, bottomWidth, pivot } = data;
 
 		let yOrigin;
-		switch(data.pivot){
+		switch(pivot){
 			case "center":
-				yOrigin = -(data.height / 2);
+				yOrigin = -(height / 2);
 				break;
 			case "top":
-				yOrigin = -data.height;
+				yOrigin = -height;
 				break;
 			case "bottom":
 				yOrigin = 0;
@@ -40,29 +41,31 @@ AFRAME.registerGeometry("trapezium", {
 
 		//define vertices
 		//------------------------------------------------
-		const bottomHeavy 	= data.topWidth < data.bottomWidth;
-		const xOrigin 		= bottomHeavy ? -(data.bottomWidth) / 2 : -(data.topWidth) / 2;
-		const wingWidth 	= bottomHeavy ? (data.bottomWidth - data.topWidth) / 2 : wingWidth 	= (data.topWidth - data.bottomWidth) / 2;
+		const bottomHeavy 	= topWidth < bottomWidth;
+		const xOrigin 		= bottomHeavy ? -bottomWidth / 2 : -topWidth / 2;
+		const wingWidth 	= bottomHeavy ? (bottomWidth - topWidth) / 2 : (topWidth - bottomWidth) / 2;
+
+
 
 		let vertices;
 		if(bottomHeavy){
 			vertices = [
-				[xOrigin, (yOrigin * !data.flat), -(yOrigin * data.flat)],
-				[(xOrigin + wingWidth), ((data.height + yOrigin) * !data.flat), -((data.height + yOrigin) * data.flat)],
-				[(xOrigin + (wingWidth + data.topWidth)), ((data.height + yOrigin) * !data.flat), -((data.height + yOrigin) * data.flat)],
-				[(xOrigin + ((wingWidth * 2) + data.topWidth)), (yOrigin * !data.flat), -(yOrigin * data.flat)],
-				[(xOrigin + (wingWidth + data.topWidth)), (yOrigin * !data.flat), -(yOrigin * data.flat)],
-				[(xOrigin + wingWidth), (yOrigin * !data.flat), -(yOrigin * data.flat)]
+				[xOrigin, (yOrigin * !flat), -(yOrigin * flat)],
+				[(xOrigin + wingWidth), ((height + yOrigin) * !flat), -((height + yOrigin) * flat)],
+				[(xOrigin + (wingWidth + topWidth)), ((height + yOrigin) * !flat), -((height + yOrigin) * flat)],
+				[(xOrigin + ((wingWidth * 2) + topWidth)), (yOrigin * !flat), -(yOrigin * flat)],
+				[(xOrigin + (wingWidth + topWidth)), (yOrigin * !flat), -(yOrigin * flat)],
+				[(xOrigin + wingWidth), (yOrigin * !flat), -(yOrigin * flat)]
 			];
 			
 		} else {
 			vertices = [
-				[xOrigin, ((data.height + yOrigin) * !data.flat), -((data.height + yOrigin) * data.flat)],
-				[(xOrigin + wingWidth), ((data.height + yOrigin) * !data.flat), -((data.height + yOrigin) * data.flat)],
-				[(xOrigin + (wingWidth + data.bottomWidth)), ((data.height + yOrigin) * !data.flat), -((data.height + yOrigin) * data.flat)],
-				[(xOrigin + ((wingWidth * 2) + data.bottomWidth)), ((data.height + yOrigin) * !data.flat), -((data.height + yOrigin) * data.flat)],
-				[(xOrigin + (wingWidth + data.bottomWidth)), (yOrigin * !data.flat), -(yOrigin * data.flat)],
-				[(xOrigin + wingWidth), (yOrigin * !data.flat), -(yOrigin * data.flat)]
+				[xOrigin, ((height + yOrigin) * !flat), -((height + yOrigin) * flat)],
+				[(xOrigin + wingWidth), ((height + yOrigin) * !flat), -((height + yOrigin) * flat)],
+				[(xOrigin + (wingWidth + bottomWidth)), ((height + yOrigin) * !flat), -((height + yOrigin) * flat)],
+				[(xOrigin + ((wingWidth * 2) + bottomWidth)), ((height + yOrigin) * !flat), -((height + yOrigin) * flat)],
+				[(xOrigin + (wingWidth + bottomWidth)), (yOrigin * !flat), -(yOrigin * flat)],
+				[(xOrigin + wingWidth), (yOrigin * !flat), -(yOrigin * flat)]
 			];
 		}
 	
